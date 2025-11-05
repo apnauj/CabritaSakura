@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 @NoArgsConstructor
 @Data
+@ToString(exclude = {"categoria"})
 
 public class Producto implements Serializable {
     private static Long nextId= 1L;

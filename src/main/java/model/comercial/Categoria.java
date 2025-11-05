@@ -3,12 +3,14 @@ package model.comercial;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 @NoArgsConstructor
 @Data
+@ToString(exclude = {"productos"})
 
 public class Categoria implements Serializable {
     private static Long nextId= 1L;

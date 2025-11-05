@@ -73,9 +73,8 @@ public class Cliente extends Usuario {
                         nuevaCompra.agregarLinea(lineaCompra);
 
                     }
-
-                    this.historialCompras.add(nuevaCompra);
                     nuevaCompra.setEstado(EstadoCompra.FINALIZADA);
+                    this.historialCompras.add(nuevaCompra);
                     this.carrito.vaciarCarrito();
                     System.out.println("Compra realizada exitosamente!");
 
