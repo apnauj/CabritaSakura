@@ -379,6 +379,7 @@ public class Main {
                     String numeroEnmascarado = leerString();
                     System.out.println("Digite el saldo: ");
                     double saldo = pedirDouble();
+                    sc.nextLine();
                     TipoMetodoDePago tipo = null;
                     String opcion = sc.nextLine();
                     boolean flag = true;
@@ -636,6 +637,7 @@ public class Main {
                     switch (sc.nextLine()) {
                         case "1"->{
                             productos.get(idProducto).obtenerDetalles();
+                            seguir = false;
                         }
                         case "2"->{
                             System.out.println("Escriba la cantidad de productos que desea comprar");
@@ -645,6 +647,7 @@ public class Main {
                             } catch (StockInsuficienteException e){
                                 System.out.println(e.getMessage());
                             }
+                            seguir = false;
                         }
                         case "3"->{seguir=false;}
                         default -> {System.out.println("\n❌Opcion invalida, intente de nuevo\n");}
