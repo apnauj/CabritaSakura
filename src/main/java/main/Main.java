@@ -942,6 +942,7 @@ public class Main {
                 String paisOrigen = leerString();
                 System.out.println("3. Edad");
                 int edad = sc.nextInt();
+                sc.nextLine();
                 if (edad < 0){
                     while (edad < 0 || edad > 100){
                         System.out.println("Vuelva a intentar, no se aceptan edades fuera del rango [1-100]");
