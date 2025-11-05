@@ -1,0 +1,5 @@
+package model.enums;
+
+public enum RolUsuario {
+    ADMINISTRADOR_CONTENIDO, DUENA, CLIENTE, DESARROLLADOR, ADMINISTRADOR_USUARIO
+}
