@@ -369,7 +369,8 @@ public class Main {
             System.out.println("5. Comprar carrito");
             System.out.println("6. Vaciar carrito");
             System.out.println("7. Mostrar historial de compras");
-            System.out.println("8. Salir");
+            System.out.println("8. Mostrar metodos de pago");
+            System.out.println("9. Salir");
             switch (sc.nextLine()) {
                 case "1"->{
                     System.out.println("Por favor proporcione la siguiente informacion para añadir el método de pago:");
@@ -379,9 +380,8 @@ public class Main {
                     String numeroEnmascarado = leerString();
                     System.out.println("Digite el saldo: ");
                     double saldo = pedirDouble();
-                    sc.nextLine();
                     TipoMetodoDePago tipo = null;
-                    String opcion = sc.nextLine();
+                    String opcion;
                     boolean flag = true;
                     while (flag){
                         System.out.println("Seleccione su tipo de método de pago");
@@ -426,7 +426,8 @@ public class Main {
                         System.out.println("Por favor elija uno de sus métodos de pago");
                         for (MetodoDePago metodo: usuarioActual.getMetodosDePago().values()){
                             System.out.println("Titular: " +metodo.getTitular());
-                            System.out.println("Saldo: " +metodo.getSaldo()+"\n");
+                            System.out.println("Saldo: " +metodo.getSaldo());
+                            System.out.println("ID: " +metodo.getId()+"\n");
                         }
                         System.out.println("Escriba el id del método de pago con el que desea pagar");
                         Long idMetodo = pedirLong();
@@ -453,7 +454,14 @@ public class Main {
                 case "7"->{
                     System.out.println(usuarioActual.getHistorialCompras());
                 }
-                case "8"->{seguir=false;}
+                case "8"->{
+                    for (MetodoDePago metodo: usuarioActual.getMetodosDePago().values()){
+                        System.out.println("Titular: " +metodo.getTitular());
+                        System.out.println("Saldo: " +metodo.getSaldo());
+                        System.out.println("ID: " +metodo.getId()+"\n");
+                    }
+                }
+                case "9"->{seguir=false;}
                 default -> {System.out.println("Opcion invalida, intente de nuevo");}
             }
 
