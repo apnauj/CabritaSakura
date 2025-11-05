@@ -48,7 +48,9 @@ public class TrabajadorEsclavizado implements Serializable {
         } else {
             RegistroEsclavos registro = RegistroEsclavos.getInstancia();
             registro.getTrabajadores().remove(this);
-            asignadoA.getTrabajadores().remove(this);
+            if (asignadoA != null && asignadoA.getTrabajadores() != null) {
+                asignadoA.getTrabajadores().remove(this);
+            }
             asignadoA = fabricaDestino;
             fabricaDestino.asignarTrabajador(this);
             registro.getTrabajadores().add(this);

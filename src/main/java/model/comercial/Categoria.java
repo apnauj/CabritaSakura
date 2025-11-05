@@ -26,8 +26,10 @@ public class Categoria implements Serializable {
     }
 
     public void listarProductos(){
-        for (Producto producto : productos) {
-            producto.obtenerDetalles();
+        if (productos != null) {
+            for (Producto producto : productos) {
+                producto.obtenerDetalles();
+            }
         }
     }
 }

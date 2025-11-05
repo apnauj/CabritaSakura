@@ -452,7 +452,7 @@ public class Main {
 
                 }
                 case "7"->{
-                    System.out.println(usuarioActual.getHistorialCompras());
+                    usuarioActual.verHistorialDeCompras();
                 }
                 case "8"->{
                     for (MetodoDePago metodo: usuarioActual.getMetodosDePago().values()){
@@ -602,7 +602,9 @@ public class Main {
                     try{
                         if (categorias.containsKey(idCategoria)){
                             Categoria c = categorias.get(idCategoria);
-                            c.getProductos().forEach(producto -> producto.setCategoria(null));
+                            if (c.getProductos() != null) {
+                                c.getProductos().forEach(producto -> producto.setCategoria(null));
+                            }
                             categorias.remove(idCategoria);
                             System.out.println("\n❌Categoria eliminada exitosamente\n");
                         } else {
@@ -700,7 +702,7 @@ public class Main {
                                 Producto nuevoP = new Producto(nombre, p.getDescripcion(), p.getPrecio(), p.getStock(), categoriaActual);
                                 nuevoP.setId(p.getId());
 
-                                if (categoriaActual != null) {
+                                if (categoriaActual != null && categoriaActual.getProductos() != null) {
                                     categoriaActual.getProductos().remove(p);
                                     categoriaActual.getProductos().add(nuevoP);
                                 }
@@ -718,7 +720,7 @@ public class Main {
                                 Producto nuevoP = new Producto(p.getNombre(), descripcion, p.getPrecio(), p.getStock(), categoriaActual);
                                 nuevoP.setId(p.getId());
 
-                                if (categoriaActual != null) {
+                                if (categoriaActual != null && categoriaActual.getProductos() != null) {
                                     categoriaActual.getProductos().remove(p);
                                     categoriaActual.getProductos().add(nuevoP);
                                 }
@@ -742,7 +744,7 @@ public class Main {
                                 Producto nuevoP = new Producto(p.getNombre(), p.getDescripcion(), precio, p.getStock(), categoriaActual);
                                 nuevoP.setId(p.getId());
 
-                                if (categoriaActual != null) {
+                                if (categoriaActual != null && categoriaActual.getProductos() != null) {
                                     categoriaActual.getProductos().remove(p);
                                     categoriaActual.getProductos().add(nuevoP);
                                 }
@@ -766,7 +768,7 @@ public class Main {
                                 Producto nuevoP = new Producto(p.getNombre(), p.getDescripcion(), p.getPrecio(), stock, categoriaActual);
                                 nuevoP.setId(p.getId());
 
-                                if (categoriaActual != null) {
+                                if (categoriaActual != null && categoriaActual.getProductos() != null) {
                                     categoriaActual.getProductos().remove(p);
                                     categoriaActual.getProductos().add(nuevoP);
                                 }
@@ -786,7 +788,7 @@ public class Main {
                                     sc.nextLine();
 
                                     Categoria categoriaAntigua = p.getCategoria();
-                                    if (categoriaAntigua != null) {
+                                    if (categoriaAntigua != null && categoriaAntigua.getProductos() != null) {
                                         categoriaAntigua.getProductos().remove(p);
                                     }
 
@@ -798,7 +800,7 @@ public class Main {
 
                                     Producto productoActualizado = new Producto(p.getNombre(), p.getDescripcion(), p.getPrecio(), p.getStock(), nuevaCategoria);
 
-                                    if (nuevaCategoria != null) {
+                                    if (nuevaCategoria != null && nuevaCategoria.getProductos() != null) {
                                         nuevaCategoria.getProductos().add(productoActualizado);
                                     }
 
@@ -847,6 +849,9 @@ public class Main {
                                 System.out.println("Por favor proporcione el nuevo nombre");
                                 String nombre = leerString();
                                 ArrayList<Producto> productosCategoria = c.getProductos();
+                                if (productosCategoria == null) {
+                                    productosCategoria = new ArrayList<>();
+                                }
                                 Categoria cNueva = new Categoria(nombre,c.getDescripcion());
                                 cNueva.setId(c.getId());
                                 cNueva.setProductos(productosCategoria);
@@ -859,6 +864,9 @@ public class Main {
                                 System.out.println("Por favor proporcione la nueva descripcion");
                                 String descripcion = leerString();
                                 ArrayList<Producto> productosCategoria = c.getProductos();
+                                if (productosCategoria == null) {
+                                    productosCategoria = new ArrayList<>();
+                                }
                                 Categoria cNueva = new Categoria(c.getNombre(),descripcion);
                                 cNueva.setId(c.getId());
                                 cNueva.setProductos(productosCategoria);
@@ -955,9 +963,9 @@ public class Main {
                     while (edad < 0 || edad > 100){
                         System.out.println("Vuelva a intentar, no se aceptan edades fuera del rango [1-100]");
                         edad = sc.nextInt();
+                        sc.nextLine();
                     }
                 }
-                sc.nextLine();
                 System.out.println("4. Fecha de Captura");
                 String fechaCaptura = leerString();
                 System.out.println("5. Nivel de Salud");

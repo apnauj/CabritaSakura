@@ -7,7 +7,6 @@ import exception.StockInsuficienteException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import model.comercial.*;
 import model.enums.EstadoCompra;
 import model.enums.EstadoCuenta;
@@ -89,12 +88,20 @@ public class Cliente extends Usuario {
 
 
     public void verHistorialDeCompras(){
+        if (this.historialCompras == null || this.historialCompras.isEmpty()) {
+            System.out.println("No hay compras en el historial.");
+            return;
+        }
         for (Compra compra : this.historialCompras) {
-            System.out.println("ID: "+compra.getId()+" Fecha: "+compra.getFecha());
-            for (LineaCompra lineaCompra : compra.getLineaCompra()) {
-                System.out.println("Producto: "+lineaCompra.getProducto()+" Cantidad: "+lineaCompra.getCantidad()+ "  " + lineaCompra.getProducto().getPrecio()*lineaCompra.getCantidad());
+            System.out.println("\nID: "+compra.getId()+" Fecha: "+compra.getFecha());
+            if (compra.getLineaCompra() != null) {
+                for (LineaCompra lineaCompra : compra.getLineaCompra()) {
+                    if (lineaCompra != null && lineaCompra.getProducto() != null) {
+                        System.out.println("  Producto: "+lineaCompra.getProducto().getNombre()+" | Cantidad: "+lineaCompra.getCantidad()+" | Subtotal: "+lineaCompra.getProducto().getPrecio()*lineaCompra.getCantidad());
+                    }
+                }
             }
-            System.out.println("Total: "+compra.getTotal());
+            System.out.println("Total: "+compra.getTotal()+"\n");
         }
     }
 

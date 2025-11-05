@@ -20,7 +20,7 @@ public class Fabrica implements Serializable {
     private List<TrabajadorEsclavizado> trabajadores;
 
     public void asignarTrabajador(TrabajadorEsclavizado trabajador) {
-        if (trabajador != null && !trabajadores.contains(trabajador)) {
+        if (trabajador != null && trabajadores != null && !trabajadores.contains(trabajador)) {
             trabajadores.add(trabajador);
             trabajador.setAsignadoA(this);
         }
